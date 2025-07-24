@@ -1,0 +1,288 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="my_bot">
+
+<!-- BASE LINK-->
+<link name="base_link">
+</link>
+
+<link name="base_footprint">
+</link>
+
+
+<joint name="shadow_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="base_footprint"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<!-- CHASSIS LINK -->
+<joint name="chassis_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="chassis"/>
+  <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+</joint>
+
+<link name="chassis">
+  <visual>
+    <origin xyz="-0.1524 0 -0.1524"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/chesi.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.1524 0 -0.1524"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/chesi.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2</mu> <!-- Coefficient of friction -->
+          <mu2>2</mu2> <!-- Secondary coefficient of friction -->
+        </ode>
+      </friction>
+       <contact>
+          <ode>
+            <kp>500000.0</kp>
+            <kd>100</kd>
+          </ode>
+        </contact>
+    </surface>
+  </collision>
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="10.0"/>
+     <inertia 
+        ixx="0.0116" ixy="0.0" ixz="0.0"
+        iyy="0.0116" iyz="0.0"
+        izz="0.0465"/>
+  </inertial>
+</link>
+
+<!-- FRONT LEFT WHEEL LINK -->
+<joint name="front_left_wheel_joint" type="continuous">
+  <parent link="chassis"/>
+  <child link="front_left_wheel"/>
+  <origin xyz="0.07854 0.01 0.068" rpy="-1.5709 1.5709 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="front_left_wheel">
+  <visual>
+    <origin xyz="-0.0358 0.0172 -0.034" rpy="1.5709 0 1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="-0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0358 0.0172 -0.034" rpy="1.5709 0 1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="-0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2</mu> <!-- Coefficient of friction -->
+          <mu2>2</mu2> <!-- Secondary coefficient of friction -->
+        </ode>
+      </friction>
+       <contact>
+          <ode>
+            <kp>500000.0</kp>
+            <kd>100</kd>
+          </ode>
+        </contact>
+    </surface>
+  </collision>
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+   <inertia 
+        ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0"
+        izz="0.0012"/>
+  </inertial>
+</link>
+
+<!-- REAR LEFT WHEEL LINK--> 
+<joint name="rear_left_wheel_joint" type="continuous">
+  <parent link="chassis"/>
+  <child link="rear_left_wheel"/>
+  <origin xyz="0.07854 0.01 -0.068" rpy="-1.5709 1.5709 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="rear_left_wheel">
+  <visual>
+    <origin xyz="-0.0358 -0.023 -0.034" rpy="1.5709 0 1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0358 -0.023 -0.034" rpy="1.5709 0 1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2</mu> <!-- Coefficient of friction -->
+          <mu2>2</mu2> <!-- Secondary coefficient of friction -->
+        </ode>
+      </friction>
+       <contact>
+          <ode>
+            <kp>500000.0</kp>
+            <kd>100</kd>
+          </ode>
+        </contact>
+    </surface>
+  </collision>
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia 
+        ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0"
+        izz="0.0012"/>
+  </inertial>
+</link>
+
+<!-- FRONT RIGHT WHEEL LINK-->
+<joint name="front_right_wheel_joint" type="continuous">
+  <parent link="chassis"/>
+  <child link="front_right_wheel"/>
+  <origin xyz="-0.07854 0.01 0.068" rpy="-1.5709 1.5709 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="front_right_wheel">
+  <visual>
+    <origin xyz="-0.0358 0.023 -0.034" rpy="0 0 -1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0358 0.023 -0.034" rpy="0 0 -1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2</mu> <!-- Coefficient of friction -->
+          <mu2>2</mu2> <!-- Secondary coefficient of friction -->
+        </ode>
+      </friction>
+       <contact>
+          <ode>
+            <kp>500000.0</kp>
+            <kd>100</kd>
+          </ode>
+        </contact>
+    </surface>
+  </collision>
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia 
+        ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0"
+        izz="0.0012"/>
+  </inertial>
+</link>
+
+<!-- REAR RIGHT WHEEL LINK--> 
+<joint name="rear_right_wheel_joint" type="continuous">
+  <parent link="chassis"/>
+  <child link="rear_right_wheel"/>
+  <origin xyz="-0.07854 0.01 -0.068" rpy="-1.5709 1.5709 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="rear_right_wheel">
+  <visual>
+    <origin xyz="-0.0358 -0.0172 -0.034" rpy="0 0 -1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="-0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0358 -0.0172 -0.034" rpy="0 0 -1.5709"/>
+    <geometry>
+      <mesh filename="package://my_bot/meshes/tyre.STL" scale="-0.001 0.001 0.001"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2</mu> <!-- Coefficient of friction -->
+          <mu2>2</mu2> <!-- Secondary coefficient of friction -->
+        </ode>
+      </friction>
+       <contact>
+          <ode>
+            <kp>500000.0</kp>
+            <kd>100</kd>
+          </ode>
+        </contact>
+    </surface>
+  </collision>
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia 
+        ixx="0.001" ixy="0.0" ixz="0.0"
+        iyy="0.001" iyz="0.0"
+        izz="0.0012"/>
+  </inertial>
+</link>
+
+
+
+<ros2_control name="MecanumSystem" type="system">
+    <hardware>
+        <plugin>fake_components/GenericSystem</plugin>
+    </hardware>
+  <joint name="front_left_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+    <state_interface name="position"/>
+  </joint>
+  <joint name="front_right_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+    <state_interface name="position"/>
+  </joint>
+  <joint name="rear_left_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+    <state_interface name="position"/>
+  </joint>
+  <joint name="rear_right_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="velocity"/>
+    <state_interface name="position"/>
+  </joint>
+</ros2_control>
+  
+<gazebo>
+    <plugin name="mecanum_drive_controller" filename="libgazebo_ros_planar_move.so">
+    
+            <parameters>/home/bart/my_bot/src/config/mecanum_controllers.yaml</parameters>
+            
+            
+      
+      <command_topic>cmd_vel</command_topic>
+      
+      <odometry_frame>odom</odometry_frame>
+      <odometry_rate>20.0</odometry_rate>
+      <robot_base_frame>base_link</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+    </plugin>
+    
+    
+  
+</gazebo>
+</robot>
